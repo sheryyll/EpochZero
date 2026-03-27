@@ -9,10 +9,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from src.exception import CustomException
 from src.logger import logging
-from src.utlis import save_object
+from src.utils import save_object
 
 @dataclass
-class DataTansformationConfig:
+class DataTransformationConfig:
     preprocessor_obj_file_path = os.path.join('artifacts', 'preprocessor.pkl')
 
 
@@ -21,7 +21,7 @@ class DataTransformation:
     This func is responsible  for data transformation
     '''
     def __init__(self):
-        self.data_trandsformation_config = DataTansformationConfig()
+        self.data_transformation_config = DataTransformationConfig()
     
     def get_data_transformer_obj(self):
         try:
@@ -99,14 +99,14 @@ class DataTransformation:
             logging.info("saved preprocessing object")
 
             save_object(
-                file_path=self.data_trandsformation_config.preprocessor_obj_file_path,
+                file_path=self.data_transformation_config.preprocessor_obj_file_path,
                 obj=preprocessing_obj
             )
 
             return (
                train_arr,
                test_arr,
-               self.data_trandsformation_config.preprocessor_obj_file_path 
+               self.data_transformation_config.preprocessor_obj_file_path 
             )
 
         except Exception as e:
